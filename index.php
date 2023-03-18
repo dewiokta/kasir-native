@@ -47,7 +47,7 @@
                                 $total = 0;
                                 $query = mysqli_query($conn, "SELECT * FROM laporan");
                                 while ($d = mysqli_fetch_array($query)) {
-                                    $total = $d['subtotal'];
+                                    $total = $d['bayar'];
                                     $total += $total;
                                 }
                                 ?>
