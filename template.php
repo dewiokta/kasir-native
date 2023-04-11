@@ -20,6 +20,11 @@
 
     <!-- Custom styles for this page -->
     <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <style>
+        .nota{
+            font-size: 15px;
+        }
+    </style>
 
 </head>
 
@@ -66,6 +71,11 @@
             <li class="nav-item">
                 <a class="nav-link" href="tables.php">
                     <span>Rekap Order</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="debit.php">
+                    <span>Pendapatan</span></a>
             </li>
 
             <li class="nav-item">

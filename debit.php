@@ -28,7 +28,7 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">Tabel Pengeluaran</h1>
+            <h1 class="h3 mb-2 text-gray-800">Tabel Pendapatan</h1>
             <?php
 
             function format_ribuan($nilai)
@@ -41,7 +41,7 @@
             // $kembalian = 0;
             // $subtotal =0;
             $date = date("d-F-Y");
-            $query = mysqli_query($conn, "SELECT * FROM pengeluaran");
+            $query = mysqli_query($conn, "SELECT * FROM pendapatan");
             while ($d = $query->fetch_assoc()) {
                 // echo $date;
                 if ($d['tanggal'] == $date) {
@@ -58,7 +58,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                    Pengeluaran (Harian)</div>
+                                    Pendapatan (Harian)</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">Rp<?php echo format_ribuan($jumlah) ?></div>
                             </div>
                             <div class="col-auto">
@@ -72,11 +72,11 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Pengeluaran</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Pendapatan</h6>
                 </div>
                 <div class="card-body">
                     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalTambah">
-                        Tambah Pengeluaran
+                        Tambah Pendapatan
                     </button>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -84,7 +84,6 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Tanggal</th>
-                                    <th>Keterangan</th>
                                     <th>Nominal</th>
                                     <th>Action</th>
                                 </tr>
@@ -92,19 +91,18 @@
 
                             <tbody>
                                 <?php $no = 1;
-                                $data_kredit = mysqli_query($conn, "SELECT * FROM pengeluaran ORDER BY id_pengeluaran DESC");
+                                $data_kredit = mysqli_query($conn, "SELECT * FROM pendapatan ORDER BY id_pendapatan DESC");
                                 while ($d = mysqli_fetch_array($data_kredit)) {
                                 ?>
                                     <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $d['tanggal']; ?></td>
-                                        <td><?php echo $d['keterangan']; ?></td>
                                         <td><?php echo $d['jumlah']; ?></td>
                                         <td>
-                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $d['id_pengeluaran']; ?>">
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $d['id_pendapatan']; ?>">
                                                 Edit
                                             </button>
-                                            <a class="btn btn-danger btn-sm" href="?id=<?php echo $d['id_pengeluaran']; ?>" onclick="javascript:return confirm('Hapus Data Barang ?');">
+                                            <a class="btn btn-danger btn-sm" href="?id=<?php echo $d['id_pendapatan']; ?>" onclick="javascript:return confirm('Hapus Data Barang ?');">
                                                 Hapus</a>
                                         </td>
                                     </tr>
@@ -112,16 +110,16 @@
                                     include 'koneksi.php';
                                     if (!empty($_GET['id'])) {
                                         $id = $_GET['id'];
-                                        $hapus_data = mysqli_query($conn, "DELETE FROM pengeluaran WHERE id_pengeluaran ='$id'");
-                                        echo '<script>window.location="kredit.php"</script>';
+                                        $hapus_data = mysqli_query($conn, "DELETE FROM pendapatan WHERE id_pendapatan ='$id'");
+                                        echo '<script>window.location="debit.php"</script>';
                                     }
 
                                     ?>
-                                    <div class="modal fade" id="ModalEdit<?php echo $d['id_pengeluaran']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="ModalEdit<?php echo $d['id_pendapatan']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Edit Pengeluaran</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">Edit pendapatan</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
@@ -137,14 +135,10 @@
                                                             <div class="col-sm-8 mb-2">
                                                                 <input type="text" class="form-control form-control-sm" name="nominal" id="nominal" value="<?php echo $d['jumlah']; ?>">
                                                             </div>
-                                                            <label class="col-sm-4 col-form-label col-form-label-sm"><b>Keterangan</b></label>
-                                                            <div class="col-sm-8 mb-2">
-                                                                <input type="text" class="form-control form-control-sm" name="ket" id="ket" value="<?php echo $d['keterangan']; ?>">
-                                                            </div>
 
 
                                                             <div class="modal-footer">
-                                                                <input type="hidden" name="id" value="<?php echo $d['id_pengeluaran']; ?>">
+                                                                <input type="hidden" name="id" value="<?php echo $d['id_pendapatan']; ?>">
                                                                 <button type="submit" name="update" class="btn btn-primary">Simpan</button>
                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                                             </div>
@@ -153,15 +147,14 @@
                                                     if (isset($_POST['update'])) {
                                                         $id = $_POST['id'];
                                                         $tgl = $_POST['tgl'];
-                                                        $ket = $_POST['ket'];
                                                         $jml = $_POST['nominal'];
 
 
-                                                        $sql = "UPDATE pengeluaran SET keterangan = '$ket',jumlah='$jml'
-                                                                    WHERE id_pengeluaran='$id' ";
+                                                        $sql = "UPDATE pendapatan SET jumlah='$jml'
+                                                                    WHERE id_pendapatan='$id' ";
                                                         $query = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                                                         if ($query) {
-                                                            echo '<script>window.location="kredit.php"</script>';
+                                                            echo '<script>window.location="debit.php"</script>';
                                                         } else {
                                                             echo "Error :" . $sql . "<br>" . mysqli_error($conn);
                                                         }
@@ -181,7 +174,7 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Pengeluaran</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel">Tambah Pendapatan</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -192,10 +185,6 @@
                                                 <label class="col-sm-4 col-form-label col-form-label-sm"><b>Tanggal</b></label>
                                                 <div class="col-sm-8 mb-2">
                                                     <input type="text" class="form-control form-control-sm" name="tanggal" id="tanggal" value="<?php echo date("d-F-Y") ?>" readonly>
-                                                </div>
-                                                <label class="col-sm-4 col-form-label col-form-label-sm"><b>Keterangan</b></label>
-                                                <div class="col-sm-8 mb-2">
-                                                    <input type="text" class="form-control form-control-sm" name="ket" id="ket">
                                                 </div>
                                                 <label class="col-sm-4 col-form-label col-form-label-sm"><b>nominal</b></label>
                                                 <div class="col-sm-8 mb-2">
@@ -210,14 +199,13 @@
                                         <?php
                                         if (isset($_POST['simpan'])) {
                                             $tanggal = $_POST['tanggal'];
-                                            $keterangan = $_POST['ket'];
                                             $nominal = $_POST['nominal'];
 
 
-                                            $sql = "INSERT INTO pengeluaran ( tanggal, keterangan, jumlah ) VALUES ( '$tanggal','$keterangan','$nominal')";
+                                            $sql = "INSERT INTO pendapatan ( tanggal, jumlah ) VALUES ( '$tanggal','$nominal')";
                                             $query = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                                             if ($query) {
-                                                echo '<script>window.location="kredit.php"</script>';
+                                                echo '<script>window.location="debit.php"</script>';
                                             } else {
                                                 echo "Error :" . $sql . "<br>" . mysqli_error($conn);
                                             }
