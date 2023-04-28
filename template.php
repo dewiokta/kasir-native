@@ -21,7 +21,7 @@
     <!-- Custom styles for this page -->
     <link href="assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <style>
-        .nota{
+        .nota {
             font-size: 15px;
         }
     </style>
@@ -72,15 +72,16 @@
                 <a class="nav-link" href="tables.php">
                     <span>Rekap Order</span></a>
             </li>
-
             <li class="nav-item">
-                <a class="nav-link" href="debit.php">
-                    <span>Pendapatan</span></a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="kredit.php">
-                    <span>Pengeluaran</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+                    <span>Keuangan</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="debit.php">Pendapatan</a>
+                        <a class="collapse-item" href="kredit.php">Pengeluaran</a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->

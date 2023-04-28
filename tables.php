@@ -169,7 +169,7 @@
                                                             </div>
                                                             <label class="col-sm-4 col-form-label col-form-label-sm"><b>Kurangan</b></label>
                                                             <div class="col-sm-8 mb-2">
-                                                                <input type="number" class="form-control form-control-sm" name="kurangan" id="kurangan" value="<?php echo $d['kurangan']; ?>" onchange="statusOtomatis()">
+                                                                <input type="number" class="form-control form-control-sm" name="kurangan" id="kurangan" value="<?php echo $d['kurangan']; ?>" onchange="">
                                                             </div>
                                                             <label class="col-sm-4 col-form-label col-form-label-sm"><b>Tgl. Bayar</b></label>
                                                             <div class="col-sm-8 mb-2">
@@ -177,7 +177,13 @@
                                                             </div>
                                                             <label class="col-sm-4 col-form-label col-form-label-sm"><b>Status</b></label>
                                                             <div class="col-sm-8 mb-2">
-                                                                <input type="text" class="form-control form-control-sm" name="status" id="status" value="" >
+                                                                <select class="custom-select" name="status" id="inputGroupSelect01">
+                                                                    <option value="<?php echo $d['status']; ?>"><?php echo $d['status']; ?></option>
+                                                                    <option value="DP">DP</option>
+                                                                    <option value="Belum Bayar">Belum Bayar</option>
+                                                                    <option value="Lunas">Lunas</option>
+                                                                </select>
+                                                                <!-- <input type="text" class="form-control form-control-sm" name="status" id="status" value="" > -->
                                                             </div>
                                                         </div>
 
@@ -250,12 +256,12 @@
 
 <script type="text/javascript">
     function statusOtomatis() {
-        // var pembayaran = parseInt(document.getElementById('bayar').value);
-        // console.log(pembayaran);
+        var pembayaran = parseInt(document.getElementById('bayar').value);
+        console.log(pembayaran);
         let kurangan = parseInt(document.getElementById('kurangan').value);
         console.log(kurangan);
         // console.log(total);
-        if (kurangan == 0) {
+        if (bayar >= kurangan) {
             // document.getElementById('kurangan').value = '0';
             document.getElementById('status').value = 'Lunas';
         }
