@@ -73,7 +73,7 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Order Data</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Data Pesanan</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -82,7 +82,7 @@
                                 <tr>
                                     <th>No</th>
                                     <th>No Transaksi</th>
-                                    <th>Customer</th>
+                                    <th>Pelanggan</th>
                                     <th>Barang</th>
                                     <th>Ukuran</th>
                                     <th>Harga</th>
@@ -94,7 +94,7 @@
                                     <th>Tanggal Pesan</th>
                                     <th>Tanggal Bayar</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
 
@@ -119,25 +119,46 @@
                                         <td><?php echo $d['tanggal_bayar']; ?></td>
                                         <td><?php echo $d['status']; ?></td>
                                         <td>
+                                            <div class="d-flex ">
 
-                                            <?php
-                                            if ($d['status'] == 'Lunas') {
-                                            ?>
-                                                <button type="button" class="btn btn-success btn-sm">
-                                                    Selesai
-                                                </button>
-                                            <?php
-                                            } else {
-                                            ?>
-                                                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $d['no_transaksi']; ?>">
-                                                    Pelunasan
-                                                </button>
+                                                <?php
+                                                include 'koneksi.php';
+                                                if (!empty($_GET['id'])) {
+                                                    $id = $_GET['id'];
+                                                    $hapus_data = mysqli_query($conn, "DELETE FROM laporan WHERE id_laporan ='$id'");
+                                                    echo '<script>window.location="tables.php"</script>';
+                                                }
 
-                                            <?php } ?>
+                                                ?>
+                                                <?php
+                                                if ($d['status'] == 'Lunas.') {
+                                                ?>
+                                                    <button type="button" class="btn btn-success btn-sm">
+                                                        Selesai
+                                                    </button>
+                                                <?php
+                                                } else {
+                                                ?>
+                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#ModalEdit<?php echo $d['no_transaksi']; ?>">
+                                                        Pelunasan
+                                                    </button>
 
+                                                <?php } ?>
+
+                                                <a class="btn btn-danger btn-xs " href="?no_trans=<?php echo $d['no_transaksi']; ?>" onclick="javascript:return confirm('Hapus Data ?');">
+                                                    Hapus</a>
+                                            </div>
                                         </td>
                                     </tr>
+                                    <?php
+                                                include 'koneksi.php';
+                                                if (!empty($_GET['no_trans'])) {
+                                                    $id = $_GET['no_trans'];
+                                                    $hapus_data = mysqli_query($conn, "DELETE FROM laporan WHERE no_transaksi ='$id'");
+                                                    echo '<script>window.location="tables.php"</script>';
+                                                }
 
+                                                ?>
                                     <!-- modal edit data -->
                                     <div class="modal fade" id="ModalEdit<?php echo $d['no_transaksi']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
@@ -181,7 +202,7 @@
                                                                     <option value="<?php echo $d['status']; ?>"><?php echo $d['status']; ?></option>
                                                                     <option value="DP">DP</option>
                                                                     <option value="Belum Bayar">Belum Bayar</option>
-                                                                    <option value="Lunas">Lunas</option>
+                                                                    <option value="Lunas.">Lunas.</option>
                                                                 </select>
                                                                 <!-- <input type="text" class="form-control form-control-sm" name="status" id="status" value="" > -->
                                                             </div>
@@ -253,6 +274,8 @@
 
 <!-- Page level custom scripts -->
 <script src="assets/js/demo/datatables-demo.js"></script>
+
+
 
 <script type="text/javascript">
     function statusOtomatis() {

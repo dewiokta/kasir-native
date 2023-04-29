@@ -143,7 +143,7 @@
                                                 <option value="">--Pilih--</option>
                                                 <option value="DP">DP</option>
                                                 <option value="Belum Bayar">Belum Bayar</option>
-                                                <option value="Lunas">Lunas</option>
+                                                <option value="Lunas.">Lunas.</option>
                                             </select>
                                         </div>
                                         <label class="col-sm-4 col-form-label col-form-label-sm"><b>Tanggal Bayar</b></label>
@@ -322,7 +322,7 @@
                         <div class="text-right mt-3">
                             <form method="POST">
                                 <button class="btn btn-primary btn-icon-split" onclick="printContent('print')"><span class="icon text-white-50"><i class="fa fa-print mr-1"></i></span> <span class="text">Print</span></button>
-                                <button class="btn btn-success btn-icon-split" name="selesai" type="submit"><span class="icon text-white-50"><i class="fa fa-check mr-1"></i></span><span class="text">Selesai</span> </button>
+                                <button class="btn btn-success btn-icon-split" name="selesai"  type="submit"><span class="icon text-white-50"><i class="fa fa-check mr-1"></i></span><span class="text">Selesai</span> </button>
                             </form>
                         </div>
 

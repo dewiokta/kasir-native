@@ -50,6 +50,7 @@
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
                 <a class="nav-link" href="index.php">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
 
@@ -64,17 +65,20 @@
             <!-- Nav Item -->
             <li class="nav-item">
                 <a class="nav-link" href="order.php">
+                    <i class="fas fa-fw fa-table"></i>
                     <span>Nota Order</span></a>
             </li>
 
             <!-- Nav Item -->
             <li class="nav-item">
                 <a class="nav-link" href="tables.php">
+                <i class="fas fa-fw fa-folder"></i>
                     <span>Rekap Order</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-                    <span>Keuangan</span>
+                <i class="fas fa-fw fa-chart-area"></i>    
+                <span>Keuangan</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
